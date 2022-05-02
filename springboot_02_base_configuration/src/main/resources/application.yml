@@ -6,3 +6,18 @@ province: beijing
 city: beijing
 area: haidian
 
+user:
+  username: wendy
+  age: 18
+
+likes:
+  - game
+  - music
+  - sleep
+
+users:
+  - name: Tom
+    age: 20
+  - name: Jim
+    age: 23
+

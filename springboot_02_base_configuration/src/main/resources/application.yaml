@@ -1,2 +1,6 @@
 server:
   port: 82
+
+user:
+  name: wendy
+  age: 18
