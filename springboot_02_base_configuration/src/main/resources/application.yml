@@ -1,0 +1,8 @@
+server:
+  port: 81
+
+country: china
+province: beijing
+city: beijing
+area: haidian
+
