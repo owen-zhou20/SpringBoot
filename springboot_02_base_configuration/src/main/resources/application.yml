@@ -21,3 +21,13 @@ users:
   - name: Jim
     age: 23
 
+baseDir: c:\windows
+#use ${attribute name} to use data
+tempDir: ${baseDir}\temp
+
+datasource:
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost/springboot_db
+  username: root
+  password: root
+
