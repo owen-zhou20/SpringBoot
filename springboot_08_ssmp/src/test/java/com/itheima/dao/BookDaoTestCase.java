@@ -1,5 +1,9 @@
 package com.itheima.dao;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.itheima.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,22 +43,40 @@ public class BookDaoTestCase {
 
     @Test
     void testDelete(){
-        System.out.println(bookDao.selectById(1));
+        System.out.println(bookDao.deleteById(9));
     }
 
     @Test
     void testGetAll(){
-        System.out.println(bookDao.selectById(1));
+
+        System.out.println(bookDao.selectList(null));
     }
 
     @Test
     void testGetPage(){
-        System.out.println(bookDao.selectById(1));
+        IPage page = new Page(2,5);
+        bookDao.selectPage(page, null);
+        System.out.println(page.getCurrent());
+        System.out.println(page.getSize());
+        System.out.println(page.getTotal());
+        System.out.println(page.getPages());
+        System.out.println(page.getRecords());
     }
 
     @Test
     void testGetBy(){
-        System.out.println(bookDao.selectById(1));
+        QueryWrapper<Book> qw = new QueryWrapper<>();
+        qw.like("name","C++");
+        bookDao.selectList(qw);
+    }
+
+    @Test
+    void testGetBy2(){
+        String name = "c++";
+        LambdaQueryWrapper<Book> lqw = new LambdaQueryWrapper<>();
+        //if(name!=null) lqw.like(Book::getName,name);
+        lqw.like(name != null,Book::getName,name);
+        bookDao.selectList(lqw);
     }
 
 
