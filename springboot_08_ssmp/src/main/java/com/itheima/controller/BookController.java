@@ -1,11 +1,11 @@
 package com.itheima.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.itheima.controller.utils.R;
 import com.itheima.domain.Book;
 import com.itheima.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,9 +17,37 @@ public class BookController {
     private IBookService bookService;
 
     @GetMapping
-    public List<Book> getAll(){
-        return bookService.list();
+    public R getAll(){
+        return new R(true,bookService.list());
     }
 
+    @PostMapping
+    public R save(@RequestBody Book book){
+        /*R r = new R();
+        boolean flag = bookService.save(book);
+        r.setFlag(flag);*/
+        R r = new R(bookService.save(book));
+        return r;
+    }
+
+    @PutMapping
+    public R update(@RequestBody Book book){
+        return new R(bookService.updateById(book));
+    }
+
+    @DeleteMapping("{id}")
+    public R delete(@PathVariable Integer id){
+        return new R(bookService.removeById(id));
+    }
+
+    @GetMapping("{id}")
+    public R getById(@PathVariable Integer id){
+        return new R(true,bookService.getById(id));
+    }
+
+    @GetMapping("{currentPage}/{pageSize}")
+    public R getPage(@PathVariable int currentPage,@PathVariable int pageSize){
+        return new R(true,bookService.getPage(currentPage,pageSize));
+    }
 
 }
