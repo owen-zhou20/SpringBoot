@@ -28,6 +28,7 @@ public class BookController {
         r.setFlag(flag);*/
         R r = new R(bookService.save(book));
         return r;
+        //return new R(false);
     }
 
     @PutMapping
